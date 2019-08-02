@@ -1,0 +1,37 @@
+<div id="container">
+  <div id="main">
+
+    <div *ngFor="let category of categoryItemsList; let outer = index">
+      <ul>
+        {{ category.category }} : ${{ category.total }}
+        <li *ngFor="let items of category.items; let inner = index">
+          {{ items.name }} : ${{ items.price }} <button type="submit" (click)="removeItem(outer, inner)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </li>
+      </ul>
+    </div>
+
+    <div>Total: {{totalAll}}</div>
+
+    <input type="text" class="form-control"
+           placeholder="Item Name" [(ngModel)]="txtItemName" name="itemName" style="display: inline;"/>
+
+    <div class="dollar">
+      <input type="number" class="form-control" min="0" [(ngModel)]="txtItemPrice" name="itemPrice" />
+    </div>
+
+    <select [(ngModel)]="selectedCategory" (change)="selectChange()" id="categories">
+      <option *ngFor="let category of categoryItemsListOptions; let i = index"
+              [ngValue]=i>
+        {{category.category}}
+      </option>
+    </select>
+
+    <form (submit)="addIttems()" style="">
+      <button class="btn btn-primary" type="submit">
+        Add
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+    </form>
+
+  </div>
+</div>
